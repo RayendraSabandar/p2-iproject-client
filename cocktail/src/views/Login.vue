@@ -28,7 +28,7 @@
                             <input v-model="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                         </div>
                         <div class="pt-5">
-                            <button type="submit" class="btn register-button">Login</button>
+                            <button type="submit" class="btn login-button">Login</button>
                         </div>
                   </form>
               </div>
@@ -81,7 +81,7 @@ img {
     height: 300px;
 }
 
-.register-button {
+.login-button {
     width: 100%;
     color: white;
     background-image: linear-gradient(to bottom left, #103410, #133E12);

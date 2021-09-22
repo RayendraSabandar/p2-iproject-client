@@ -11,13 +11,20 @@ export default new Vuex.Store({
       access_token : '',
       email : '',
       id : 0
-    }
+    },
+    searchResult: []
   },
   mutations: {
     SET_USER_DETAIL(state, payload){
       state.userDetail.access_token = payload.access_token
       state.userDetail.email = payload.email
       state.userDetail.id = payload.id
+    },
+    CHANGE_PAGE(state, payload){
+      router.push({ name: payload})
+    },
+    SET_SEARCH_RESULT(state, payload){
+      state.searchResult = payload
     }
   },
   actions: {
@@ -35,6 +42,7 @@ export default new Vuex.Store({
         console.log(err.response);
       }
     },
+
     async login(context, payload){
       try {
         const user = await http({
@@ -46,9 +54,26 @@ export default new Vuex.Store({
         localStorage.setItem('email', user.data.email)
         localStorage.setItem('user_id', user.data.id)
         context.commit('SET_USER_DETAIL', user.data)
+        router.push({ name : 'LandingPage'})
       } catch (err) {
         console.log(err);
       }
+    },
+    async searchByName(context, payload){
+      try {
+        const access_token = localStorage.getItem('access_token')
+        const cocktail = await http({
+          method : 'get',
+          url : `cocktails/searchByName/${payload}`,
+          headers : {
+            access_token
+          }
+        })
+        context.commit('SET_SEARCH_RESULT', cocktail.data)
+      } catch (err) {
+        console.log(err);
+      }
+     
     }
   },
   modules: {
