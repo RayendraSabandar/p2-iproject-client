@@ -51,6 +51,7 @@
                     </div>
                 </div>
             </div>
+      <HFooter></HFooter>
       </div>
   </div>
 </template>
@@ -59,9 +60,10 @@
 import IngredientCard from '../components/IngredientCard.vue'
 import SideBar from '../components/SideBar.vue'
 import NavBar from '../components/Navbar.vue'
+import HFooter from 'vue-hacktiv8-footer'
 export default {
     name : 'DrinkDetail',
-    components : { IngredientCard, SideBar, NavBar },
+    components : { IngredientCard, SideBar, NavBar, HFooter },
     computed : {
         drinkDetail(){
             return this.$store.state.drinkDetail

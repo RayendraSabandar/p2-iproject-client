@@ -58,6 +58,19 @@ export default new Vuex.Store({
       state.taggedDrinks = payload
       state.menu = 'Tagged Drinks'
       state.searchBy = 'Test'
+    },
+    SET_LOGOUT_DATA(state){
+      state.menu = 'Search By'
+      state.searchBy = 'Name'
+      state.userDetail = {
+        access_token : '',
+        email : '',
+        id : 0
+      },
+      state.searchResult = [],
+      state.drinkDetail = null,
+      state.tags = [],
+      state.taggedDrinks = []
     }
   },
   actions: {
@@ -93,8 +106,9 @@ export default new Vuex.Store({
       }
     },
 
-    logout(){
+    logout(context){
       localStorage.clear()
+      context.commit('SET_LOGOUT_DATA')
       router.push({name : 'Login'})
     },
 
