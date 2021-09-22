@@ -17,7 +17,7 @@
               </div>
               <div class="py-3 text-left">
                   <h2>Sign Up</h2>
-                  <h5>Sign in to continue to our website</h5>
+                  <h5>Sign up and login to continue to our website</h5>
               </div>
               <div class="my-3">
                   <form @submit.prevent="handleRegister">

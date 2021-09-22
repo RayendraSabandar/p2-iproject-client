@@ -2,19 +2,19 @@
   <div class="search p-3">
                 <form>
                     <div class="row mb-3">
-                        <div v-if="this.searchBy === 'name'" class="col-sm-4">
+                        <div v-if="this.searchBy === 'Name'" class="col-sm-4">
                             <input v-model="query" type="text" class="form-control" id="inputEmail3" placeholder="e.g.vodka">
                         </div>
-                        <div v-if="this.searchBy === 'ingredients'" class="col-sm-4">
+                        <div v-if="this.searchBy === 'Ingredients'" class="col-sm-4">
                             <input v-model="query" type="text" class="form-control" id="inputEmail3" placeholder="e.g.orange">
                         </div>
-                        <div v-if="this.searchBy === 'isAlcoholic'" class="col-sm-4">
+                        <div v-if="this.searchBy === 'IsAlcoholic'" class="col-sm-4">
                             <input v-model="query" type="text" class="form-control" id="inputEmail3" placeholder="e.g.alcoholic">
                         </div>
-                        <div v-if="this.searchBy === 'glass'" class="col-sm-4">
+                        <div v-if="this.searchBy === 'Glass'" class="col-sm-4">
                             <input v-model="query" type="text" class="form-control" id="inputEmail3" placeholder="e.g.cocktail glass">
                         </div>
-                        <div v-if="this.searchBy === 'category'" class="col-sm-4">
+                        <div v-if="this.searchBy === 'Category'" class="col-sm-4">
                             <input v-model="query" type="text" class="form-control" id="inputEmail3" placeholder="e.g.ordinary drink">
                         </div>
                         <div class="col-sm-1">
@@ -40,15 +40,15 @@ export default {
     methods : {
         handleSearch(){
             const query = this.query
-            if(this.searchBy === 'name'){
+            if(this.searchBy === 'Name'){
                 this.$store.dispatch('searchByName', query)
-            } else if(this.searchBy === 'ingredients'){
+            } else if(this.searchBy === 'Ingredients'){
                 this.$store.dispatch('searchByIngredient', query)
-            } else if(this.searchBy === 'isAlcoholic'){
+            } else if(this.searchBy === 'IsAlcoholic'){
                 this.$store.dispatch('filterByIsAlcoholic', query)
-            } else if(this.searchBy === 'glass'){
+            } else if(this.searchBy === 'Glass'){
                 this.$store.dispatch('filterByGlass', query)
-            } else if(this.searchBy === 'category'){
+            } else if(this.searchBy === 'Category'){
                 this.$store.dispatch('filterByCategory', query)
             }
         }

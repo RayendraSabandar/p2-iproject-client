@@ -2,9 +2,7 @@
   <div class="d-flex parent">
       <side-bar></side-bar>
       <div class="d-flex flex-column content-page h-100">
-          <div>
-              Navbar
-          </div>
+          <nav-bar></nav-bar>
           <search-by></search-by>
           <div class="container">
               <div class="row">
@@ -16,9 +14,10 @@
 </template>
 
 <script>
-import ResultCard from '../components/ResultCards.vue'
 import SideBar from '../components/SideBar.vue'
 import SearchBy from '../components/SearchBy.vue'
+import ResultCard from '../components/ResultCards.vue'
+import NavBar from '../components/NavBar.vue'
 export default {
     name : 'LandingPage',
     
@@ -27,7 +26,7 @@ export default {
             return this.$store.state.searchResult
         }
     },
-    components : { ResultCard, SideBar, SearchBy },
+    components : { ResultCard, SideBar, SearchBy, NavBar },
     
 }
 </script>
