@@ -23,10 +23,26 @@
 export default {
     computed : {
         menu(){
-            return this.$store.state.menu
+            const menu = this.$store.state.menu
+            if(menu === 'Search By' || menu === 'Filter By'){
+                return menu
+            } 
+            else if(menu === 'Add Tag'){
+                return menu
+            } else {
+                return this.$store.state.drinkDetail.cocktailDetail.strDrink
+            }
         },
         subMenu(){
-            return this.$store.state.searchBy
+            const menu = this.$store.state.menu
+            if(menu === 'Search By' || menu === 'Filter By'){
+                return this.$store.state.searchBy
+            } 
+            else if(menu === 'Add Tag'){
+                return 'Only 1 Word is Permitted'
+            } else {
+                return this.$store.state.drinkDetail.cocktailDetail.strAlcoholic
+            }
         },
         username(){
             return localStorage.getItem('email').split('@')[0]

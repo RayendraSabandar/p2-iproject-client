@@ -17,17 +17,26 @@
 import SideBar from '../components/SideBar.vue'
 import SearchBy from '../components/SearchBy.vue'
 import ResultCard from '../components/ResultCards.vue'
-import NavBar from '../components/NavBar.vue'
+import NavBar from '../components/Navbar.vue'
 export default {
     name : 'LandingPage',
-    
+    created(){
+        this.fetchTags()
+    },
     computed : {
         drinks(){
             return this.$store.state.searchResult
+        },
+        tags(){
+            return this.$store.state.tags
         }
     },
     components : { ResultCard, SideBar, SearchBy, NavBar },
-    
+    methods : {
+        fetchTags(){
+            this.$store.dispatch('fetchTags')
+        }
+    }
 }
 </script>
 
