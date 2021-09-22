@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex parent">
       <side-bar></side-bar>
-      <div class="d-flex flex-column content-page h-100">
+      <div class="d-flex flex-column content-page h-100 justify-content-between">
           <nav-bar></nav-bar>
           <div class="py-5">
             <div class="container d-flex flex-column p-4 shadow-lg h-100 w-50 ">
@@ -20,6 +20,7 @@
                 </div>
             </div>
           </div>
+      <HFooter></HFooter>
       </div>
   </div>
 </template>
@@ -27,6 +28,7 @@
 <script>
 import SideBar from '../components/SideBar.vue'
 import NavBar from '../components/Navbar.vue'
+import HFooter from 'vue-hacktiv8-footer'
 export default {
     name : 'AddTags',
     data(){
@@ -34,7 +36,7 @@ export default {
             tagName : ''
         }
     },
-    components : { SideBar, NavBar },
+    components : { SideBar, NavBar, HFooter },
     methods : {
         handleAddTag(){
             const tag = this.tagName
