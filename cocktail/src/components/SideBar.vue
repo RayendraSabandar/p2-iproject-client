@@ -27,14 +27,11 @@
               </div>
               <div class="text-right p-3">
                   <h4>MY DRINKS</h4>
-                  <div>
-                    <button @click.prevent="handleButton('wedding')" type="button" class="btn">WEDDING</button>
+                  <div v-for="tag in tags" :key="tag.id">
+                    <button @click.prevent="handleButton(tag.name)" type="button" class="btn">{{tag.name}}</button>
                   </div>
                   <div>
-                    <button @click.prevent="handleButton('casual')" type="button" class="btn">CASUAL</button>
-                  </div>
-                  <div>
-                    <button @click.prevent="handleButton('addTag')" type="button" class="btn">ADD TAG</button>
+                    <button @click.prevent="handleButton('Add Tags')" type="button" class="btn">ADD TAG</button>
                   </div>
               </div>
           </div>        
@@ -44,6 +41,14 @@
 <script>
 export default {
     name: 'SideBar',
+    computed : {
+        tags(){
+            return this.$store.state.tags.map(el => {
+                el.name = el.name.toUpperCase()
+                return el
+            })
+        }
+    },
     methods : {
         handleButton(payload){
           this.$store.commit('CHANGE_PAGE', payload)

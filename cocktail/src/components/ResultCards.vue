@@ -5,7 +5,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{drink.strDrink}}</h5>
                 <p class="card-text">{{drink.strCategory}} <br> {{drink.strAlcoholic}} <br> {{drink.strGlass}}</p>
-                <a href="#" class="btn detail-button">See Detail</a>
+                <a href="#" @click.prevent="handleDetail(drink.idDrink)" class="btn detail-button">See Detail</a>
             </div>
         </div>
     </div>
@@ -13,7 +13,12 @@
 
 <script>
 export default {
-    props : ['drink']
+    props : ['drink'],
+    methods : {
+        handleDetail(id){
+            this.$store.dispatch('drinkDetail', id)
+        }
+    }
 }
 </script>
 

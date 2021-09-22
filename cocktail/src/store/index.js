@@ -15,6 +15,8 @@ export default new Vuex.Store({
     searchResult: [],
     menu : 'Search By',
     searchBy : 'Name',
+    drinkDetail : null,
+    tags : []
   },
   mutations: {
     SET_USER_DETAIL(state, payload){
@@ -22,17 +24,26 @@ export default new Vuex.Store({
       state.userDetail.email = payload.email
       state.userDetail.id = payload.id
     },
+    SET_TAGS(state, payload){
+      state.tags = payload
+    },
     CHANGE_PAGE(state, payload){
       state.searchBy = payload
       if(payload === 'Name' || payload === 'Ingredients'){
         state.menu = 'Search By'
-      } else {
+      } else if(payload === 'IsAlcoholic' || payload === 'Glass' || payload === 'Category') {
         state.menu = 'Filter By'
+      } else {
+        state.menu = 'Add Tag'
+        router.push({ name : 'AddTag'})
       }
       state.searchResult = []
     },
     SET_SEARCH_RESULT(state, payload){
       state.searchResult = payload
+    },
+    SET_DRINK_DETAIL(state, payload){
+      state.drinkDetail = payload
     }
   },
   actions: {
@@ -67,6 +78,46 @@ export default new Vuex.Store({
         console.log(err);
       }
     },
+
+    async fetchTags(context){
+      const access_token = localStorage.getItem('access_token')
+      try {
+        const tags = await http({
+          method : 'get',
+          url : `tags/`,
+          headers : {
+            access_token
+          }
+        })
+        context.commit('SET_TAGS', tags.data)
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    async addTag(context, payload){
+      const name = payload
+      const access_token = localStorage.getItem('access_token')
+      try {
+        const tag = await http({
+          method : 'post',
+          url : `tags/add`,
+          data : {
+            name
+          },
+          headers : {
+            access_token
+          }
+        })
+        if(tag){
+          context.commit('CHANGE_PAGE', 'Name')
+          router.push({name : 'LandingPage'})
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
     async searchByName(context, payload){
       try {
         const access_token = localStorage.getItem('access_token')
@@ -146,6 +197,24 @@ export default new Vuex.Store({
         console.log(err);
       }
     },
+
+    async drinkDetail(context, payload){
+      const id = payload
+      const access_token = localStorage.getItem('access_token')
+      try {
+        const cocktail = await http({
+          method : 'get',
+          url : `cocktails/searchById/${id}`,
+          headers : {
+            access_token
+          }
+        })
+        context.commit('SET_DRINK_DETAIL', cocktail.data)
+        router.push({ path : `drinkDetail/${id}`})
+      } catch (err) {
+        console.log(err);
+      }
+    }
   },
   modules: {
   }
