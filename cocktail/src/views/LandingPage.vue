@@ -5,9 +5,7 @@
           <div>
               Navbar
           </div>
-          <div>
-              <button @click.prevent="handleSearch('vodka')" type="button" class="btn">Search</button>
-          </div>
+          <search-by></search-by>
           <div class="container">
               <div class="row">
                     <result-card v-for="drink in drinks" :key="drink.idDrink" :drink="drink"></result-card>
@@ -20,19 +18,17 @@
 <script>
 import ResultCard from '../components/ResultCards.vue'
 import SideBar from '../components/SideBar.vue'
+import SearchBy from '../components/SearchBy.vue'
 export default {
     name : 'LandingPage',
+    
     computed : {
         drinks(){
             return this.$store.state.searchResult
         }
     },
-    components : { ResultCard, SideBar },
-    methods : {
-        handleSearch(payload){
-            this.$store.dispatch('searchByName', payload)
-        }
-    }
+    components : { ResultCard, SideBar, SearchBy },
+    
 }
 </script>
 
@@ -48,4 +44,6 @@ export default {
     min-height: 100vh;
     background-color: white;
 }
+
+
 </style>

@@ -12,7 +12,8 @@ export default new Vuex.Store({
       email : '',
       id : 0
     },
-    searchResult: []
+    searchResult: [],
+    searchBy : 'name'
   },
   mutations: {
     SET_USER_DETAIL(state, payload){
@@ -21,7 +22,8 @@ export default new Vuex.Store({
       state.userDetail.id = payload.id
     },
     CHANGE_PAGE(state, payload){
-      router.push({ name: payload})
+      state.searchBy = payload
+      state.searchResult = []
     },
     SET_SEARCH_RESULT(state, payload){
       state.searchResult = payload
@@ -73,8 +75,71 @@ export default new Vuex.Store({
       } catch (err) {
         console.log(err);
       }
-     
-    }
+    },
+
+    async searchByIngredient(context, payload){
+      try {
+        const access_token = localStorage.getItem('access_token')
+        const cocktail = await http({
+          method : 'get',
+          url : `cocktails/searchByIngredient/${payload}`,
+          headers : {
+            access_token
+          }
+        })
+        context.commit('SET_SEARCH_RESULT', cocktail.data)
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    async filterByIsAlcoholic(context, payload){
+      try {
+        const access_token = localStorage.getItem('access_token')
+        const cocktail = await http({
+          method : 'get',
+          url : `cocktails/filterByType/${payload}`,
+          headers : {
+            access_token
+          }
+        })
+        context.commit('SET_SEARCH_RESULT', cocktail.data)
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    async filterByGlass(context, payload){
+      try {
+        const access_token = localStorage.getItem('access_token')
+        const cocktail = await http({
+          method : 'get',
+          url : `cocktails/filterByGlass/${payload}`,
+          headers : {
+            access_token
+          }
+        })
+        context.commit('SET_SEARCH_RESULT', cocktail.data)
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    async filterByCategory(context, payload){
+      try {
+        const access_token = localStorage.getItem('access_token')
+        const cocktail = await http({
+          method : 'get',
+          url : `cocktails/filterByCategory/${payload}`,
+          headers : {
+            access_token
+          }
+        })
+        context.commit('SET_SEARCH_RESULT', cocktail.data)
+      } catch (err) {
+        console.log(err);
+      }
+    },
   },
   modules: {
   }
