@@ -55,10 +55,29 @@ const routes = [
   }
 ]
 
+
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  const access_token = localStorage.getItem('access_token')
+  const isPrivatePage = ['Register', 'Login'].includes(to.name)
+  if(access_token){
+    if(isPrivatePage){
+      next({name : 'LandingPage'})
+    } else {
+      next()
+    }
+  } else {
+    if(!isPrivatePage){
+      next({name : 'Login'})
+    } else {
+      next()
+    }
+  }
 })
 
 export default router

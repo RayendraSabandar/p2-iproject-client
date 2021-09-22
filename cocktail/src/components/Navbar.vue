@@ -15,6 +15,9 @@
             <div class="p-2">
                 <img src="@/assets/avatar.png">
             </div>
+            <div class="p-2 d-flex align-items-center">
+                <button @click="handleLogout" type="button" class="btn btn-dark">Logout</button>
+            </div>
         </div>
     </nav>
 </template>
@@ -24,7 +27,6 @@ export default {
     computed : {
         menu(){
             const menu = this.$store.state.menu
-            console.log(menu);
             if(menu === 'Search By' || menu === 'Filter By'){
                 return menu
             } 
@@ -51,8 +53,12 @@ export default {
         },
         username(){
             return localStorage.getItem('email').split('@')[0]
-        },
-        
+        }
+    },
+    methods : {
+        handleLogout(){
+            this.$store.dispatch('logout')
+        }
     }
 
 }

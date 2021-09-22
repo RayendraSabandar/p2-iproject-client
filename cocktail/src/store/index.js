@@ -93,6 +93,11 @@ export default new Vuex.Store({
       }
     },
 
+    logout(){
+      localStorage.clear()
+      router.push({name : 'Login'})
+    },
+
     async fetchTags(context){
       const access_token = localStorage.getItem('access_token')
       try {
