@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Register from '../views/Register.vue'
+import Login from '../views/Login.vue'
 import LandingPage from '../views/LandingPage.vue'
 import DrinkDetail from '../views/DrinkDetail.vue'
 
@@ -24,6 +25,11 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: Register
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
   },
   {
     path: '/drinkDetail/:id',

@@ -20,7 +20,7 @@
                   <h5>Sign in to continue to our website</h5>
               </div>
               <div class="my-3">
-                  <form @submit.prevent="handleRegister">
+                  <form @submit.prevent="handleLogin">
                         <div class="my-3">
                             <input v-model="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email address">
                         </div>
@@ -28,13 +28,13 @@
                             <input v-model="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                         </div>
                         <div class="pt-5">
-                            <button type="submit" class="btn register-button">Register</button>
+                            <button type="submit" class="btn register-button">Login</button>
                         </div>
                   </form>
               </div>
           </div>
           <div class="p-2 right w-50 d-flex flex-column justify-content-center align-items-center">
-              <img src="@/assets/register.svg">
+              <img src="@/assets/login.svg">
           </div>
       </div>
   </div>
@@ -42,7 +42,7 @@
 
 <script>
 export default {
-    name : 'Register',
+    name : 'Login',
     data(){
         return {
             email : '',
@@ -50,12 +50,12 @@ export default {
         }
     },
     methods : {
-        handleRegister(){
+        handleLogin(){
             const payload = {
                 email : this.email,
                 password : this.password
             }
-            this.$store.dispatch('register', payload)
+            this.$store.dispatch('login', payload)
         }
     }
 }
