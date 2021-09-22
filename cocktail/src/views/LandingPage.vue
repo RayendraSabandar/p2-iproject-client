@@ -1,31 +1,16 @@
 <template>
   <div class="d-flex parent">
-      <div class="d-flex flex-column sidebar-green h-100">
-          <div >
-              logo
-          </div>
-          <div>
-              content
-          </div>
-      </div>
+      <side-bar></side-bar>
       <div class="d-flex flex-column content-page h-100">
           <div>
               Navbar
           </div>
           <div>
-              Search
+              <button @click.prevent="handleSearch('vodka')" type="button" class="btn">Search</button>
           </div>
           <div class="container">
               <div class="row">
-                  <div class="col">
-                    <result-card></result-card>
-                  </div>
-                  <div class="col">
-                    <result-card></result-card>
-                  </div>
-                  <div class="col">
-                    <result-card></result-card>
-                  </div>
+                    <result-card v-for="drink in drinks" :key="drink.idDrink" :drink="drink"></result-card>
               </div>
           </div>
       </div>
@@ -34,23 +19,33 @@
 
 <script>
 import ResultCard from '../components/ResultCards.vue'
+import SideBar from '../components/SideBar.vue'
 export default {
-components : { ResultCard }
+    name : 'LandingPage',
+    computed : {
+        drinks(){
+            return this.$store.state.searchResult
+        }
+    },
+    components : { ResultCard, SideBar },
+    methods : {
+        handleSearch(payload){
+            this.$store.dispatch('searchByName', payload)
+        }
+    }
 }
 </script>
 
 <style scoped>
-.parent {
-    height: 100vh;
-}
 
-.sidebar-green {
+.parent {
+    height: 100%;
     background-color:#0F430E;
-    width: 20%;
-    color: white;
 }
 
 .content-page {
-    width: 80%
+    width: 95%;
+    min-height: 100vh;
+    background-color: white;
 }
 </style>
