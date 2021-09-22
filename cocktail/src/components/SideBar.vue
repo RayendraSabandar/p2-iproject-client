@@ -28,7 +28,7 @@
               <div class="text-right p-3">
                   <h4>MY DRINKS</h4>
                   <div v-for="tag in tags" :key="tag.id">
-                    <button @click.prevent="handleButton(tag.name)" type="button" class="btn">{{tag.name}}</button>
+                    <button @click.prevent="handleTag(tag.name)" type="button" class="btn">{{tag.name}}</button>
                   </div>
                   <div>
                     <button @click.prevent="handleButton('Add Tags')" type="button" class="btn">ADD TAG</button>
@@ -52,6 +52,10 @@ export default {
     methods : {
         handleButton(payload){
           this.$store.commit('CHANGE_PAGE', payload)
+        },
+        handleTag(payload){
+          const lowerCase = payload.charAt(0) + payload.slice(1).toLowerCase()
+          this.$store.dispatch('fetchCocktails', lowerCase)
         }
     }
 }
@@ -60,7 +64,7 @@ export default {
 <style scoped>
 .sidebar-green {
     background-color:#0F430E;
-    width: 15%;
+    width: 16%;
     color: white;
 }
 
