@@ -7,22 +7,22 @@
               <div class="d-flex flex-column justify-content-between text-right p-3">
                   <h4>SEARCH BY</h4>
                   <div>
-                    <button @click.prevent="handleButton('name')" type="button" class="btn">NAME</button>
+                    <button @click.prevent="handleButton('Name')" type="button" class="btn">NAME</button>
                   </div>
                   <div>
-                    <button @click.prevent="handleButton('ingredients')" type="button" class="btn">INGREDIENTS</button>
+                    <button @click.prevent="handleButton('Ingredients')" type="button" class="btn">INGREDIENTS</button>
                   </div>
               </div>
               <div class="text-right p-3">
                   <h4>FILTER BY</h4>
                   <div>
-                    <button @click.prevent="handleButton('isAlcoholic')" type="button" class="btn">ISALCOHOLIC</button>
+                    <button @click.prevent="handleButton('IsAlcoholic')" type="button" class="btn">ISALCOHOLIC</button>
                   </div>
                   <div>
-                    <button @click.prevent="handleButton('glass')" type="button" class="btn">GLASS</button>
+                    <button @click.prevent="handleButton('Glass')" type="button" class="btn">GLASS</button>
                   </div>
                   <div>
-                    <button @click.prevent="handleButton('category')" type="button" class="btn">CATEGORY</button>
+                    <button @click.prevent="handleButton('Category')" type="button" class="btn">CATEGORY</button>
                   </div>
               </div>
               <div class="text-right p-3">

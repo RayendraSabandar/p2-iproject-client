@@ -13,7 +13,8 @@ export default new Vuex.Store({
       id : 0
     },
     searchResult: [],
-    searchBy : 'name'
+    menu : 'Search By',
+    searchBy : 'Name',
   },
   mutations: {
     SET_USER_DETAIL(state, payload){
@@ -23,6 +24,11 @@ export default new Vuex.Store({
     },
     CHANGE_PAGE(state, payload){
       state.searchBy = payload
+      if(payload === 'Name' || payload === 'Ingredients'){
+        state.menu = 'Search By'
+      } else {
+        state.menu = 'Filter By'
+      }
       state.searchResult = []
     },
     SET_SEARCH_RESULT(state, payload){
