@@ -7,8 +7,18 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    userDetail : {
+      access_token : '',
+      email : '',
+      id : 0
+    }
   },
   mutations: {
+    SET_USER_DETAIL(state, payload){
+      state.userDetail.access_token = payload.access_token
+      state.userDetail.email = payload.email
+      state.userDetail.id = payload.id
+    }
   },
   actions: {
     async register(context, payload){
@@ -23,6 +33,21 @@ export default new Vuex.Store({
         }
       } catch (err) {
         console.log(err.response);
+      }
+    },
+    async login(context, payload){
+      try {
+        const user = await http({
+          method : 'post',
+          url : `users/login`,
+          data : payload
+        })
+        localStorage.setItem('access_token', user.data.access_token)
+        localStorage.setItem('email', user.data.email)
+        localStorage.setItem('user_id', user.data.id)
+        context.commit('SET_USER_DETAIL', user.data)
+      } catch (err) {
+        console.log(err);
       }
     }
   },
