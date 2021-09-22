@@ -5,6 +5,7 @@ import Login from '../views/Login.vue'
 import LandingPage from '../views/LandingPage.vue'
 import AddTag from '../views/AddTag.vue'
 import DrinkDetail from '../views/DrinkDetail.vue'
+import TaggedDrinks from '../views/TaggedDrinks.vue'
 
 Vue.use(VueRouter)
 
@@ -33,7 +34,7 @@ const routes = [
     component: Login
   },
   {
-    path: 'addTag',
+    path: '/addTag',
     name: 'AddTag',
     component: AddTag
   },
@@ -41,6 +42,16 @@ const routes = [
     path: '/drinkDetail/:id',
     name: 'DrinkDetail',
     component: DrinkDetail
+  },
+  {
+    path: '/taggedDrinks/drinkDetail/:id',
+    name: 'DrinkDetail',
+    component: DrinkDetail
+  },
+  {
+    path: `/taggedDrinks/:name`,
+    name: 'TaggedDrinks',
+    component: TaggedDrinks
   }
 ]
 

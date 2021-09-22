@@ -1,0 +1,31 @@
+<template>
+    <div class="col-3 mb-3 pt-2">
+        <div class="card" style="width: 14rem;">
+            <img :src="drink.image" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{drink.name}}</h5>
+                <p class="card-text">{{drink.category}} <br> {{drink.type}} <br> {{drink.glass}}</p>
+                <a href="#" @click.prevent="handleDetail(drink.idDrink)" class="btn detail-button">See Detail</a>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+    props : ['drink'],
+    methods : {
+        handleDetail(id){
+            this.$store.dispatch('drinkDetail', id)
+        }
+    }
+}
+</script>
+
+<style scoped>
+.detail-button {
+    width: 100%;
+    color: white;
+    background-image: linear-gradient(to bottom left, #103410, #133E12);
+}
+</style>

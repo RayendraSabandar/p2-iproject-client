@@ -16,7 +16,8 @@ export default new Vuex.Store({
     menu : 'Search By',
     searchBy : 'Name',
     drinkDetail : null,
-    tags : []
+    tags : [],
+    taggedDrinks : []
   },
   mutations: {
     SET_USER_DETAIL(state, payload){
@@ -44,6 +45,11 @@ export default new Vuex.Store({
     },
     SET_DRINK_DETAIL(state, payload){
       state.drinkDetail = payload
+    },
+    SET_TAGGED_DRINKS(state, payload){
+      state.taggedDrinks = payload
+      state.menu = 'Tagged Drinks'
+      state.searchBy = 'Test'
     }
   },
   actions: {
@@ -112,6 +118,27 @@ export default new Vuex.Store({
         if(tag){
           context.commit('CHANGE_PAGE', 'Name')
           router.push({name : 'LandingPage'})
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    async addToTag(context, payload){
+      const TagId = payload
+      const id = localStorage.getItem('cocktail_id')
+      const access_token = localStorage.getItem('access_token')
+      try {
+        const cocktail = await http({
+          method : 'post',
+          url : `cocktails/add/${id}`,
+          headers : {
+            access_token,
+            TagId
+          }
+        })
+        if(cocktail){
+          router.push({ name : 'LandingPage'})
         }
       } catch (err) {
         console.log(err);
@@ -198,6 +225,24 @@ export default new Vuex.Store({
       }
     },
 
+    async fetchCocktails(context, payload){
+      const access_token = localStorage.getItem('access_token')
+      const name = payload
+      try {
+        const cocktails = await http({
+          method : 'get',
+          url : `tags/${name}`,
+          headers : {
+            access_token
+          }
+        })
+        context.commit('SET_TAGGED_DRINKS', cocktails.data[0].Cocktails)
+        router.push({ path : `/taggedDrinks/${name}`})
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
     async drinkDetail(context, payload){
       const id = payload
       const access_token = localStorage.getItem('access_token')
@@ -209,6 +254,7 @@ export default new Vuex.Store({
             access_token
           }
         })
+        localStorage.setItem('cocktail_id', cocktail.data.cocktailDetail.idDrink)
         context.commit('SET_DRINK_DETAIL', cocktail.data)
         router.push({ path : `drinkDetail/${id}`})
       } catch (err) {
