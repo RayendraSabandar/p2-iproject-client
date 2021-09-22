@@ -24,13 +24,14 @@ export default {
     computed : {
         menu(){
             const menu = this.$store.state.menu
+            console.log(menu);
             if(menu === 'Search By' || menu === 'Filter By'){
                 return menu
             } 
             else if(menu === 'Add Tag'){
                 return menu
             } else {
-                return this.$store.state.drinkDetail.cocktailDetail.strDrink
+                return menu
             }
         },
         subMenu(){
@@ -40,7 +41,11 @@ export default {
             } 
             else if(menu === 'Add Tag'){
                 return 'Only 1 Word is Permitted'
-            } else {
+            } 
+            else if(menu === 'Tagged Drinks'){
+                return this.$store.state.drinkDetail.cocktailDetail.strDrink
+            }
+            else {
                 return this.$store.state.drinkDetail.cocktailDetail.strAlcoholic
             }
         },
