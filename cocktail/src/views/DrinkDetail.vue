@@ -41,7 +41,15 @@
                 </div>
             </div>
             <div>
-                <h1>Video</h1>
+                <h1>Video Tutorials</h1>
+                <div class="row d-flex justify-content-center align-items-center p-3">
+                    <div v-for="youtubeVideo in youtubeVideos" :key="youtubeVideo" class="col-6 p-2">
+                        <iframe width="560" height="315"
+                        :src="'https://www.youtube.com/embed/' + youtubeVideo" frameborder="0" 
+                        allowfullscreen>
+                    </iframe>
+                    </div>
+                </div>
             </div>
       </div>
   </div>
@@ -63,6 +71,9 @@ export default {
         },        
         tags(){
             return this.$store.state.tags
+        },
+        youtubeVideos(){
+            return this.$store.state.drinkDetail.youtubeVideoDatas
         }
     },
     methods : {

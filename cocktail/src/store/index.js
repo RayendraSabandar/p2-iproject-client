@@ -32,11 +32,18 @@ export default new Vuex.Store({
       state.searchBy = payload
       if(payload === 'Name' || payload === 'Ingredients'){
         state.menu = 'Search By'
-      } else if(payload === 'IsAlcoholic' || payload === 'Glass' || payload === 'Category') {
+        router.push({ name : 'LandingPage'})
+      } 
+      else if(payload === 'IsAlcoholic' || payload === 'Glass' || payload === 'Category') {
         state.menu = 'Filter By'
-      } else {
-        state.menu = 'Add Tag'
+        router.push({ name : 'LandingPage'})
+      } 
+      else if(payload === 'Add Tags'){
+        state.menu = 'Add Tags'
         router.push({ name : 'AddTag'})
+      }
+      else if(payload === 'Tagged Drinks'){
+        state.menu = payload
       }
       state.searchResult = []
     },
@@ -45,6 +52,7 @@ export default new Vuex.Store({
     },
     SET_DRINK_DETAIL(state, payload){
       state.drinkDetail = payload
+      state.menu = payload.cocktailDetail.strDrink
     },
     SET_TAGGED_DRINKS(state, payload){
       state.taggedDrinks = payload
