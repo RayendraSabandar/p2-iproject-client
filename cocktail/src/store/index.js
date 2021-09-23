@@ -12,6 +12,8 @@ export default new Vuex.Store({
       email : '',
       id : 0
     },
+    errorLogin : '',
+    errorRegister : '',
     searchResult: [],
     menu : 'Search By',
     searchBy : 'Name',
@@ -25,6 +27,15 @@ export default new Vuex.Store({
       state.userDetail.email = payload.email
       state.userDetail.id = payload.id
     },
+
+    SET_ERROR_LOGIN(state, payload){
+      state.errorLogin = payload
+    },
+
+    SET_REGISTER_ERROR(state, payload){
+      state.errorRegister = payload
+    },
+
     SET_TAGS(state, payload){
       state.tags = payload
     },
@@ -85,7 +96,7 @@ export default new Vuex.Store({
           router.push({ name : 'Login'})
         }
       } catch (err) {
-        console.log(err.response);
+        context.commit('SET_REGISTER_ERROR', err.response.data.message)
       }
     },
 
@@ -102,7 +113,7 @@ export default new Vuex.Store({
         context.commit('SET_USER_DETAIL', user.data)
         router.push({ name : 'LandingPage'})
       } catch (err) {
-        console.log(err);
+        context.commit('SET_ERROR_LOGIN', err.response.data.message)
       }
     },
 

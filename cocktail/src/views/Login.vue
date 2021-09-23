@@ -27,6 +27,9 @@
                         <div class="my-3">
                             <input v-model="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                         </div>
+                        <div v-if="errorLogin">
+                            <p>{{errorLogin}}</p>
+                        </div>
                         <div class="pt-5">
                             <button type="submit" class="btn login-button">Login</button>
                         </div>
@@ -49,6 +52,11 @@ export default {
             password: '',
         }
     },
+    computed : {
+        errorLogin(){
+            return this.$store.state.errorLogin
+        }
+    },
     methods : {
         handleLogin(){
             const payload = {
@@ -64,6 +72,10 @@ export default {
 <style scoped>
 .left {
     height: 100%
+}
+
+p {
+    color: red;
 }
 
 .right {
