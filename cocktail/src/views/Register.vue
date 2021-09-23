@@ -27,6 +27,9 @@
                         <div class="my-3">
                             <input v-model="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                         </div>
+                        <div v-if="errorRegister">
+                            <p v-for="error in errorRegister" :key="error">{{error}}</p>
+                        </div>
                         <div class="pt-5">
                             <button type="submit" class="btn register-button">Register</button>
                         </div>
@@ -47,6 +50,11 @@ export default {
         return {
             email : '',
             password: '',
+        }
+    },
+    computed : {
+        errorRegister(){
+            return this.$store.state.errorRegister
         }
     },
     methods : {
@@ -85,5 +93,9 @@ img {
     width: 100%;
     color: white;
     background-image: linear-gradient(to bottom left, #103410, #133E12);
+}
+
+p {
+    color: red;
 }
 </style>
